@@ -1,0 +1,17 @@
+ public void doPost(HttpServletRequest paramHttpServletRequest, HttpServletResponse paramHttpServletResponse)
+    throws ServletException, IOException
+ **************
+    localSOAPContext1.setProperty(Constants.BAG_HTTPSESSION, localHttpSession);
+          localSOAPContext1.setProperty(Constants.BAG_HTTPSERVLETREQUEST, paramHttpServletRequest);
+          localSOAPContext1.setProperty(Constants.BAG_HTTPSERVLETRESPONSE, paramHttpServletResponse);
+          
+          DocumentBuilder localDocumentBuilder = XMLParserUtils.getXMLDocBuilder();
+          
+          localEnvelope1 = 
+            ServerHTTPUtils.readEnvelopeFromRequest(localDocumentBuilder, 
+            paramHttpServletRequest.getContentType(), 
+            paramHttpServletRequest.getContentLength(), 
+            paramHttpServletRequest.getInputStream(), 
+            this.editor, 
+            paramHttpServletResponse, 
+            localSOAPContext1);

